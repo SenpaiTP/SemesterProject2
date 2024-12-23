@@ -16,100 +16,21 @@
 </head>
 <body>
     <h1>Sensor Data</h1>
-    <canvas id="sensorChart"></canvas>
+    <table id="demo">
+        {% for row in csv %}
+          <tr>
+          {% for col in row %}
+          <td>{{ col }}</td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+    </table>
+    
+    <label for="myTextBox">Enter Text:</label>
+    <input type="text" id="myTextBox" name="myTextBox" {% if csv|all %}value="ja"{% endif %}>
+
 
     <script>
-var ctx = document.getElementById('sensorChart').getContext('2d');
-var labels = [];
-var dataFugtighedssensor = [];
-var dataLyssensor = [];
-var maxDataPoints = 10; // virker ikke optimalt
-var maxTimeRange = 10; 
-
-var chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Fugtighedssensor',
-                data: dataFugtighedssensor,
-                borderColor: 'blue',
-                fill: false
-            },
-            {
-                label: 'Lyssensor',
-                data: dataLyssensor,
-                borderColor: 'red',
-                fill: false
-            }
-        ]
-    },
-    options: {
-        responsive: false, 
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                type: 'linear',
-                position: 'bottom',
-                title: {
-                    display: true,
-                    text: 'Time (s)'
-                },
-                beginAtZero: true, 
-                max: maxTimeRange, 
-                min: 0, 
-                maxTicksLimit: maxTimeRange + 1, 
-                callback: function (value) {
-                    return Number.isInteger(value) ? value : ''; 
-                }
-            },
-            y: {
-                min: 1,
-                max: 100,
-                title: {
-                    display: true,
-                    text: 'Value'
-                }
-            }
-        }
-    }
-});
-
-var currentSecond = 1;
-
-function addSensorData(fugtighedssensorValue, lyssensorValue) {
-    if (labels.length >= maxDataPoints) {
-        labels.shift();
-        dataFugtighedssensor.shift();
-        dataLyssensor.shift();
-    }
-
-    labels.push(currentSecond);
-    dataFugtighedssensor.push(fugtighedssensorValue);
-    dataLyssensor.push(lyssensorValue);
-
-    currentSecond++;
-    chart.update();
-}
-
-
-function fetchSensorData() {
-    fetch('/get_sensor_data')
-        .then(response => response.json())
-        .then(data => {
-            var fugtighedssensorValue = data.fugtighedssensor;
-            var lyssensorValue = data.lyssensor;
-            addSensorData(fugtighedssensorValue, lyssensorValue);
-        })
-        .catch(error => {
-            console.error('Error fetching sensor data:', error);
-        });
-}
-
-
-setInterval(fetchSensorData, 1000);
-
     </script>
 </body>
 </html>
