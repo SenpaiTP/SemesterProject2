@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data</title>
+    <style>
+        /* Add CSS to set a fixed size for the canvas */
+        #sensorChart {
+            width: 600px; /* Adjust the width as needed */
+            height: 300px; /* Adjust the height as needed */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <h1>Sensor Data</h1>
+    <h1>Single Value: {{single_value}} </h1>
+    <input type="submit" value="Show CSV"/>
+    <table id="demo">
+        {% for row in csv %}
+          <tr>
+          {% for col in row %}
+          <td>{{ col }}</td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+    </table>
+    <script>
+    </script>
+</body>
+</html>

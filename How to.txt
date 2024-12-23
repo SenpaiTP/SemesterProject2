@@ -1,0 +1,19 @@
+Husk at installere:
+
+pip install Flask
+
+pip install requests
+
+
+
+----------------------------
+
+Åben CMD
+
+Naviger til mappen "cd C:\Users\NAVN\OneDrive\2. Semester projekt - Gruppe 4\Sensor-kode\Raspberry server m. Graf"
+
+Skriv "python app.py"
+
+Åben ny CMD og skriv "python data_transfer.py"
+
+Dette starter serveren og dataoverførsel.

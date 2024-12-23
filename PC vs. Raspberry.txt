@@ -1,0 +1,16 @@
+// Brug denne kode, når den er i PC'en 
+
+ser = serial.Serial('COM9', 9600)  
+
+
+
+// Brug denne kode når den er på Rasperry Pi direkte
+
+ser = serial.Serial('/dev/ttyACM0', 9600)  
+
+
+
+
+
+// COM9 skal egentlig bare skiftes ud med /dev/ttyACM0
+// Det skal skives øverst i app.py
